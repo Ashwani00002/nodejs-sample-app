@@ -32,6 +32,11 @@ pipeline {
 			dockerfile {
 			filename 'Dockerfile'
 				}
+			
+			 steps {
+				echo "STAGE BUILD"
+				}
+			
 			}
 
 		}
