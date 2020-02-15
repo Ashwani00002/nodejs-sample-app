@@ -12,7 +12,7 @@ Disclaimer      : Any modification in this file should be done after consultatio
 */
 
 pipeline {
-   agent {label 'K8S_SLAVE'}
+   agent {label 'K_Master'}
    environment {
 	  NVM_DIR="$HOME/.nvm"
 	  registry = "ashwani00002/xebia_k8s"
