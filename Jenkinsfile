@@ -33,17 +33,7 @@ pipeline {
 			filename 'Dockerfile'
 				}
 			}
-			steps {
-				nvm(nvmInstallURL: "https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh",
-                nvmIoJsOrgMirror: "https://iojs.org/dist",
-                nvmNodeJsOrgMirror: "https://nodejs.org/dist",
-                version: "10.16.2") 
-				{
-                sh 'echo $GIT_BRANCH'
-				echo '********Running NPM Install **********'
-				sh 'npm install'
-				}
-			}
+
 		}
 	}
 }
