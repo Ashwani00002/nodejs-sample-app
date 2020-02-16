@@ -5,6 +5,7 @@ pipeline {
     stages {
         stage('Test') {
             steps {
+                which docker
                 sh 'node --version'
             }
         }
