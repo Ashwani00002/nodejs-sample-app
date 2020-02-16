@@ -72,25 +72,7 @@ pipeline {
 
 
 
-	stage('Kubernetest_Deployment')  {
-
-		    environment {
-                    NVM_DIR="$HOME/.nvm"
-                     when { branch "master" }
-            	   }
-             steps {
-                 nvm(nvmInstallURL: "https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh",
-                        nvmIoJsOrgMirror: "https://iojs.org/dist",
-                        nvmNodeJsOrgMirror: "https://nodejs.org/dist",
-                         version: "10.16.2") 
-						{
-                        echo '******Cloning Repo with TAGs ********'
-			            }
-                    }
-
-				}
-
-		stage('Remove Unused docker image') {
+		stage('Kubernetes_Deployment') {
 		steps
 			{
 			sh 'kubectl get svc'
