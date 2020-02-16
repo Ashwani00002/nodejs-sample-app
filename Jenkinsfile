@@ -1,3 +1,16 @@
+/*
+###############################################################################
+Jenkinsfile Name: Jenkinsfile
+Project         : Teamster 213 Backend (Nodejs)
+Description     : This jenkinsfile is used for implementing CI/CD of this project.
+Jenkins URL     : https://jenkins.celestialsys.tk
+Maintainers     : Ashwani Verma(Celestial DevOps Team)
+Email           : a.verma@celestialsys.com
+Disclaimer      : Any modification in this file should be done after consultation
+                  with the DevOps Team.
+###################################################################################
+*/
+
 pipeline {
    agent any
    environment {
@@ -55,8 +68,38 @@ pipeline {
           }
     	}
      }
-	   
-	   
-   }
 	 
-}
+
+
+
+	stage('Kubernetest_Deployment')  {
+
+		    environment {
+                    NVM_DIR="$HOME/.nvm"
+                     when { branch "master" }
+            	   }
+             steps {
+                 nvm(nvmInstallURL: "https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh",
+                        nvmIoJsOrgMirror: "https://iojs.org/dist",
+                        nvmNodeJsOrgMirror: "https://nodejs.org/dist",
+                         version: "10.16.2") 
+						{
+                        echo '******Cloning Repo with TAGs ********'
+			            }
+                    }
+
+				}
+
+		stage('Remove Unused docker image') {
+		steps
+			{
+			sh 'kubectl get svc'
+			//echo '$IMAGE_ID'
+			}
+			}
+			
+			
+			}
+	 
+	   	}
+	
