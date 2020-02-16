@@ -41,7 +41,7 @@ pipeline {
           	dockerImage = docker.build registry + ":$BRANCH_NAME.$BUILD_NUMBER"
         }
       }
-	   
+	 }  
 	   
    }
 	 
