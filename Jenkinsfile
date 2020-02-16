@@ -13,7 +13,7 @@ Disclaimer      : Any modification in this file should be done after consultatio
 
 pipeline {
    agent {label 'K_Master'}
-   tools { nodejs "node" }
+   //tools { nodejs "node" }
    environment {
 	  NVM_DIR="$HOME/.nvm"
 	  registry = "ashwani00002/xebia_k8s"
@@ -30,11 +30,16 @@ pipeline {
 
        stage('Build') {
 	steps {
+	nvm(nvmInstallURL: "https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh",
+                        nvmIoJsOrgMirror: "https://iojs.org/dist",
+                        nvmNodeJsOrgMirror: "https://nodejs.org/dist",
+                            version: "10.16.2") {
                 sh 'echo $GIT_BRANCH'
 		echo '********Running NPM Install **********'
 		sh 'npm install'
             	sh 'npm config ls'
 		sh 'docker ps -a -q'
+				}
 			}
 		}
 	}
