@@ -28,15 +28,10 @@ pipeline {
 	}
 
        stage('Build') {
-           agent {
-		dockerfile {
-		filename 'Dockerfile'
-			}
-		}
 	steps {
                 sh 'echo $GIT_BRANCH'
 		echo '********Running NPM Install **********'
-		sh 'npm install'
+		sh 'docker ps -a -q'
 			}
 		}
 	}
