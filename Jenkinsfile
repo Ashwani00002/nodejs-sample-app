@@ -36,11 +36,19 @@ pipeline {
                             version: "10.16.2") {
                 sh 'echo $GIT_BRANCH'
 		echo '********Running NPM Install **********'
-		sh 'npm install'
-            	sh 'npm config ls'
+		            sh 'npm install'
+            sh 'npm config ls'
 		sh 'docker ps -a -q'
 				}
 			}
 		}
+	
+      stage('Test') {
+        steps {
+        	echo 'Running Tests'
+        	sh 'npm test'
+              	}
+       	    }
+	
 	}
 }
