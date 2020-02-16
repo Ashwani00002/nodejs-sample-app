@@ -43,6 +43,20 @@ pipeline {
       }
 	 }  
 	   
+	   
+	       stage('Deploy Image to DockerHub') {
+      steps {
+      	script {
+        	echo 'Deploying docker images in DockerHub'
+        	docker.withRegistry( '', registryCredential ) 
+            {
+            dockerImage.push()
+            }
+          }
+    	}
+     }
+	   
+	   
    }
 	 
 }
