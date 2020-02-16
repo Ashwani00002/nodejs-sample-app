@@ -2,7 +2,7 @@ pipeline {
    agent any
    environment {
 	  registry = "ashwani00002/xebia_k8s"
-	  registryCredential = 'DockerHub-Ashwani'
+	  registryCredential = 'Docker_Hub'
 	  dockerImage = ''
    }
    stages {
@@ -34,6 +34,13 @@ pipeline {
            }
        }
 	   
+	
+    stage('Building image') {
+      steps {
+        script {
+          	dockerImage = docker.build registry + ":$BRANCH_NAME.$BUILD_NUMBER"
+        }
+      }
 	   
 	   
    }
