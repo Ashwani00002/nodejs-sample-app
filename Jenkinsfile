@@ -12,7 +12,7 @@ Disclaimer      : Any modification in this file should be done after consultatio
 */
 
 pipeline {
-   agent any
+   //agent any
    environment {
 	  registry = "ashwani00002/xebia_k8s"
 	  registryCredential = 'Docker_Hub'
@@ -72,7 +72,9 @@ pipeline {
 
 
 
-		stage('Kubernetes_Deployment') {
+		stage('Kubernetes_Deployment') 
+	   	agent {label 'MINIKUBE'}
+	   	{
 		steps
 			{
 			sh 'kubectl get svc'
