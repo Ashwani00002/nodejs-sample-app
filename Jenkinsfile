@@ -19,7 +19,23 @@ pipeline {
 		sh 'cat package.json'
            }
        }
+
 	   
-	 }
+	   
+      stage('Test') {
+           agent {
+               docker {
+                   image 'node:10-alpine'
+               }
+           }
+           steps {
+               sh 'echo Running Unit Tests'
+               sh 'npm test'
+           }
+       }
+	   
+	   
+	   
+   }
 	 
 }
