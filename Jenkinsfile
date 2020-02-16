@@ -13,6 +13,7 @@ Disclaimer      : Any modification in this file should be done after consultatio
 
 pipeline {
    agent {label 'K_Master'}
+   tools { nodejs "node" }
    environment {
 	  NVM_DIR="$HOME/.nvm"
 	  registry = "ashwani00002/xebia_k8s"
@@ -31,6 +32,8 @@ pipeline {
 	steps {
                 sh 'echo $GIT_BRANCH'
 		echo '********Running NPM Install **********'
+		sh 'npm install'
+            	sh 'npm config ls'
 		sh 'docker ps -a -q'
 			}
 		}
