@@ -1,5 +1,5 @@
 pipeline {
-   agent any
+   agent {label 'K_Master'}
    environment {
 	  registry = "ashwani00002/xebia_k8s"
 	  registryCredential = 'DockerHub-Ashwani'
