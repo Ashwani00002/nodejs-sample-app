@@ -1,5 +1,5 @@
 pipeline {
-   agent { dockerfile true }
+   agent any
    environment {
 	  registry = "ashwani00002/xebia_k8s"
 	  registryCredential = 'DockerHub-Ashwani'
@@ -7,6 +7,11 @@ pipeline {
    }
    stages {
        stage('Build') {
+	     agent {
+               docker {
+                   image 'node:10-alpine'
+               }
+           }
            steps {
 		sh 'ls -la && pwd'
 		
