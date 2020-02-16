@@ -23,21 +23,21 @@ pipeline {
     stages {
       stage('Pre-build setup') {
             steps {
-					checkout scm
-					}
-				}
+		checkout scm
+		}
+	}
 
        stage('Build') {
            agent {
-			dockerfile {
-			filename 'Dockerfile'
-				}
+		dockerfile {
+		filename 'Dockerfile'
 			}
-			steps {
+		}
+	steps {
                 sh 'echo $GIT_BRANCH'
-				echo '********Running NPM Install **********'
-				sh 'npm install'
-				}
+		echo '********Running NPM Install **********'
+		sh 'npm install'
 			}
 		}
 	}
+}
