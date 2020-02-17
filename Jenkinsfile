@@ -12,6 +12,16 @@ Disclaimer      : Any modification in this file should be done after consultatio
 */
 
 pipeline {
+    options {
+        buildDiscarder(logRotator(
+            // number of builds to keep
+            numToKeepStr:         env.BRANCH_NAME ==~ /master|v\/.*/ ? '2' :
+                                  env.BRANCH_NAME ==~ /develop/ ?  '2' :
+            // number of builds to keep the artifacts from
+            daysToKeepStr:        env.BRANCH_NAME ==~ /master|v\/.*/ ? '3' :
+                                  env.BRANCH_NAME ==~ /develop/ ?  '3' :
+        ))
+    }
    agent any
    environment {
 	  registry = "ashwani00002/xebia_k8s"
