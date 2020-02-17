@@ -77,7 +77,8 @@ pipeline {
 	   	steps
 			{
 			sh 'kubectl get svc'
-			//echo '$IMAGE_ID'
+			sh 'pwd'
+			
 			}
 			}
 	   
