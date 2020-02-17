@@ -16,7 +16,7 @@ pipeline {
         buildDiscarder(logRotator(
             // number of builds to keep
             numToKeepStr:         env.BRANCH_NAME ==~ /master|v\/.*/ ? '2' :
-                                  env.BRANCH_NAME ==~ /develop/ ?  '2' :
+                                  env.BRANCH_NAME ==~ /develop/ ?  '2' :,
             // number of builds to keep the artifacts from
             daysToKeepStr:        env.BRANCH_NAME ==~ /master|v\/.*/ ? '3' :
                                   env.BRANCH_NAME ==~ /develop/ ?  '3' :
