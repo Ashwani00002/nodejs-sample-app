@@ -84,6 +84,7 @@ pipeline {
 
 	   stage('Kubernetes_Deployment') {
 	   	agent {label 'MINIKUBE'}
+		 when { branch "master" }
 	   	steps
 			{
 			sh 'kubectl get svc'
@@ -94,7 +95,53 @@ pipeline {
 			}
 	   
 			
-			}
-	 
-	   	}
+	   
+  stage('Send Notification')
+  	{
+          steps {
+  			echo ' Sending Notification EMAIL ....'
+  		}
+  	  post 
+  	   {
+    	   always {
+              emailext (
+		      
+              		subject: "Job '${env.JOB_NAME} branch ${env.BUILD_NUMBER}'",
+		      
+              		body: """Check console output at "${env.BUILD_URL}" ${env.JOB_NAME}. 
+	      			App is runnig at -->   http://3.6.243.217:32000/
+	      			""",
+		      
+              		to: "ashwaniverma00002@gmail.com",
+              		from: "ashwaniverma0002@gmail.com")
+        }
+      }
+    }
+} 
+	post {
+    success {
+
+      emailext (
+          subject: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+          body: """<p>SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+                   Check console output at "${env.BUILD_URL}"
+                """,
+          to: "ashwaniverma00002@gmail.com",
+          from: "ashwaniverma0002@gmail.com" )
+       
+    }
+
+    failure {
+
+      emailext (
+          subject: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+          body: """<p>FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+                 Check console output at "${env.BUILD_URL}"            
+                """,
+          to: "ashwaniverma00002@gmail.com",
+          from: "ashwaniverma0002@gmail.com" )
+		}
+	}
+ 
+}
 	
