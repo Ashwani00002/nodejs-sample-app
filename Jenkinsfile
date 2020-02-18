@@ -75,7 +75,7 @@ pipeline {
 	    	
 	    	echo 'DELETING DANGLING IMAGES'
 	    	sh '''docker images'''
-	    	sh '''docker rmi $(docker images | grep "master" | awk '{print $1 ":" $2}')'''
+	    	sh '''docker rmi -f $(docker images | grep "master" | awk '{print $1 ":" $2}')'''
 	    
 	    	}
       	  }
