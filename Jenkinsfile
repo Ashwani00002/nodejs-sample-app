@@ -66,7 +66,7 @@ pipeline {
             dockerImage.push()
             }
           }
-    	}
+    	 }
      }
 	 
    stage('DELETING DANGLING IMAGES') {	
