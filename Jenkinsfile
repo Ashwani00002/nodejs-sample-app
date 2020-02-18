@@ -31,7 +31,7 @@ pipeline {
 		sh 'npm config ls' 
 		sh 'cat package.json'
            }
-       }
+        }
 
 	   
 	   
