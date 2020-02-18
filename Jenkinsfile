@@ -12,16 +12,6 @@ Disclaimer      : Any modification in this file should be done after consultatio
 */
 
 pipeline {
-    options {
-        buildDiscarder(logRotator(
-            // number of builds to keep
-            numToKeepStr:         env.BRANCH_NAME ==~ /master|v\/.*/ ? '2' :
-                                  env.BRANCH_NAME ==~ /develop/ ?  '2' :,
-            // number of builds to keep the artifacts from
-            daysToKeepStr:        env.BRANCH_NAME ==~ /master|v\/.*/ ? '3' :
-                                  env.BRANCH_NAME ==~ /develop/ ?  '3' :
-        ))
-    }
    agent any
    environment {
 	  registry = "ashwani00002/xebia_k8s"
@@ -79,7 +69,17 @@ pipeline {
     	}
      }
 	 
-
+   stage('DELETING DANGLING IMAGES') {	
+     steps {	
+	   script {
+	    	
+	    	echo 'DELETING DANGLING IMAGES'
+	    	sh '''docker images'''
+	    	sh '''docker rmi $(docker images | grep "master" | awk '{print $1 ":" $2}')'''
+	    
+	    	}
+      	  }
+    }
 
 
 	   stage('Kubernetes_Deployment') {
@@ -87,8 +87,9 @@ pipeline {
 	   	steps
 			{
 			sh 'kubectl get svc'
-			sh 'pwd'
-			
+			sh 'kubectl get deploy -o=wide'
+			sh 'kubectl set image deployment/xebia-deployment xebia-container=ashwani00002/xebia_k8s:"$BRANCH_NAME.$BUILD_NUMBER" '
+			sh 'kubectl get deploy -o=wide'
 			}
 			}
 	   
